@@ -14,7 +14,7 @@ end
 -------------------------------------------------------
 local sub = { -- here we create a table where we gonna add some frames
     monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(), -- hide main on start
-    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"), -- Second frame should be visible by default
+    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(), -- Second frame should be visible by default
     monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(),
 }
 
@@ -35,6 +35,7 @@ local menubar = monitorFrame:addMenubar():setScrollable() -- we create a menubar
     :addItem("Home")
     :addItem("Info")
     :addItem("Null")
+    :openSubFrame(2)
 
 ----------------------------------------------------------------------------------------------------------------------
 -- Main frame - [1]
