@@ -35,6 +35,7 @@ local menubar = monitorFrame:addMenubar():setScrollable() -- we create a menubar
     :addItem("Home")
     :addItem("Info")
     :addItem("Null")
+    : openSubFrame(2)
 
 ----------------------------------------------------------------------------------------------------------------------
 -- Main frame - [1]
