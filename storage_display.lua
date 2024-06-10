@@ -124,7 +124,7 @@ function mainloop()
         -- Resource name and amount generation for each entry (with skipping blocks)
         local sortedMessageEntries = sortEntries(message)
         for i=1, #sortedMessageEntries do
-            if not sortedMessageEntries then
+            if (not sortedMessageEntries) then
                 break
             end
             local itemName = sortedMessageEntries[i][1]
