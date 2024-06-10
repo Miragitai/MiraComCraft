@@ -35,7 +35,7 @@ local menubar = monitorFrame:addMenubar():setScrollable() -- we create a menubar
     :addItem("Home")
     :addItem("Info")
     :addItem("Null")
-    :selectItem(2)
+    :selectItem(2) -- Select second frame by default
 ----------------------------------------------------------------------------------------------------------------------
 -- Main frame - [1]
 sub[1]:addLabel()
@@ -87,6 +87,16 @@ function formatNumber(num)
     end
     return num
 end
+function sortEntries(message)
+    local formattedList = {}
+    for i=1, #message[3], 2 do
+        local itemName = capitalize(string.gsub(message[3][i]["name"],".+:",""):gsub("_", " "))
+        local itemCount = message[3][i]["count"]
+        local maxItemCount = message[2][i]
+        formattedList[math.ceil(i/2)] = {itemName, itemCount, maxItemCount}
+    end
+    return formattedList
+end
 
 local infoLabel = sub[2]:addLabel():setText("?"):setForeground(colors.white):setPosition(2, 2)
 sub[2]:addLabel():setText("--------------------------------------------------"):setForeground(colors.gray):setPosition(1, 3)
@@ -103,18 +113,25 @@ sub[3]:addButton():setText("No functionality"):setPosition(2, 4):setSize(18, 3)
 -- Mainloop
 function mainloop()
     while true do
+        -- mainloop area
+
         -- Info Frame --------------------------------------------------------
     	local a,b,channel,c,message = os.pullEvent("modem_message")
         if channel ~= 9173 then goto continue end
-        freeSpacePercent = 100-getSpaceInfo(message)*100
+        local freeSpacePercent = 100-getSpaceInfo(message)*100
     	infoLabel:setText(string.format("Free Space: %.3f%%", freeSpacePercent)):setForeground(warnColor(freeSpacePercent))
         
-        for i=1, #message[3], 2 do
+        -- Resource name and amount generation for each entry (with skipping blocks)
+        local sortedMessageEntries = sortEntries(message)
+        for i=1, #sortedMessageEntries do
+            if !sortedMessageEntries then
+                break
+            end
+            local itemName = sortedMessageEntries[i][1]
+            local itemCount = sortedMessageEntries[i][2]
+            local maxItemCount = sortedMessageEntries[i][3]
             local pX = 1+25*math.floor(i/40)
             local pY = 4+math.floor(i/2) - math.floor(i/40)*20
-            local itemName = capitalize(string.gsub(message[3][i]["name"],".+:",""):gsub("_", " "))
-            local itemCount = message[3][i]["count"]
-            local maxItemCount = message[2][i]
             if not storageEntries[i] then
 	            -- create new label at that position
                 storageEntries[i] = sub[2]:addLabel():setForeground(colors.lightBlue):setFontSize(.5) 
