@@ -131,7 +131,7 @@ function mainloop()
             local itemCount = sortedMessageEntries[i][2]
             local maxItemCount = sortedMessageEntries[i][3]
             local pX = 1+25*math.floor(i/20)
-            local pY = 4+math.floor(i) - math.floor(i/20)
+            local pY = 4+i - math.floor(i/20) * i
             if not storageEntries[i] then
 	            -- create new label at that position
                 storageEntries[i] = sub[2]:addLabel():setForeground(colors.lightBlue):setFontSize(.5) 
