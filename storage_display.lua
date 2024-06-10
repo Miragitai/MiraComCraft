@@ -13,8 +13,8 @@ function capitalize(str)
 end
 -------------------------------------------------------
 local sub = { -- here we create a table where we gonna add some frames
-    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"), -- obviously the first one should be shown on program start
-    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(),
+    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(), -- hide main on start
+    monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"), -- Second frame should be visible by default
     monitorFrame:addFrame():setPosition(1, 2):setSize("parent.w", "parent.h - 1"):hide(),
 }
 
