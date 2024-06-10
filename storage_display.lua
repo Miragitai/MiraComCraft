@@ -136,11 +136,11 @@ function mainloop()
 	            -- create new label at that position
                 storageEntries[i] = sub[2]:addLabel():setForeground(colors.lightBlue):setFontSize(.5) 
                 	:setPosition(pX, pY)
-                	:setText(formatInfoFrameEntry(itemName, formatNumber(itemCount)))
+                	:setText(i..formatInfoFrameEntry(itemName, formatNumber(itemCount)))
                 	:setForeground(warnColor(100-itemCount/maxItemCount*100, colors.lime, colors.yellow))
             else
                 -- label at that position already exists 
-                storageEntries[i]:setText(formatInfoFrameEntry(itemName, formatNumber(itemCount)))
+                storageEntries[i]:setText(i..formatInfoFrameEntry(itemName, formatNumber(itemCount)))
                 	:setForeground(warnColor(100-itemCount/maxItemCount*100, colors.lime, colors.yellow))
             end
         end
